@@ -1,0 +1,61 @@
+logging:
+  level:
+    '[com.subrutin.catalog]': TRACE
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1/book_catalog
+    username: wanda
+    password: wanda
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 60000
+      idle-timeout: 60000
+      max-lifetime: 180000
+      maximum-pool-size: 10
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+      
+app:
+  currency: IDR
+  time-zone: Asia/Jakarta
+  welcome-text: Hello World from wanda, are you ready?
+
+cloud:
+  api-key: ${CLOUD_KEY2}
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - development
+
+app:
+  welcome-text: Hallo World From wanda, this is development server
+
+server:
+  port: 8090
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - test
+
+server:
+  port: 8091
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - production
+
+server:
+  port: 8092
