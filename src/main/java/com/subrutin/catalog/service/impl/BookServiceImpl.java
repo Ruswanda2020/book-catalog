@@ -13,16 +13,19 @@ import com.subrutin.catalog.dto.BookDetailDto;
 import com.subrutin.catalog.dto.BookUpdateRequestDto;
 import com.subrutin.catalog.exception.BadRequestException;
 import com.subrutin.catalog.repository.BookRepository;
+import com.subrutin.catalog.repository.PublisherRepository;
 import com.subrutin.catalog.service.AuthorService;
 import com.subrutin.catalog.service.BookService;
 import com.subrutin.catalog.service.CategoryService;
 import com.subrutin.catalog.service.PublisherService;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@AllArgsConstructor
-@Service("bookService")
+@RequiredArgsConstructor
+@Service
+@Slf4j
 public class BookServiceImpl implements BookService{
 	
 	private final BookRepository bookRepository;
@@ -85,6 +88,9 @@ public class BookServiceImpl implements BookService{
 		List<Category> categories = categoryService.findCategories(dto.getCategoryList());
 		Publisher publisher = publisherService.findPublisher(dto.getPublisherId());
 		
+		log.info(authors.toString());
+		log.info(categories.toString());
+		log.info(publisher.getId().toString());
 		
 			Book book = new Book();
 			book.setAuthors(authors);
@@ -95,8 +101,11 @@ public class BookServiceImpl implements BookService{
 			
 			bookRepository.save(book);
 			
-			System.out.print("test");
-	 	
+			log.info(book.getTitle());
+			
+			
+			
+			
 			
 	}
 

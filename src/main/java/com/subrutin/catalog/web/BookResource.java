@@ -18,6 +18,7 @@ import com.subrutin.catalog.dto.BookUpdateRequestDto;
 import com.subrutin.catalog.service.BookService;
 
 import io.github.resilience4j.core.StopWatch;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +40,9 @@ public class BookResource {
 	}
 	
 	@PostMapping("/v1/book")
-	public ResponseEntity<Void> createNewBook(@RequestBody BookCreateRequestDto dto){
-		
-		bookService.createNewBook(dto);
-		return ResponseEntity.created(URI.create("/v1/book")).build();
-		
+	public ResponseEntity<Void> createNewBook(@RequestBody @Valid BookCreateRequestDto dto){
+	    bookService.createNewBook(dto);
+	    return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("/book")
