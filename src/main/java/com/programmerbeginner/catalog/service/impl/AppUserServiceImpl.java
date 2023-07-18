@@ -1,10 +1,13 @@
 package com.programmerbeginner.catalog.service.impl;
 
 import com.programmerbeginner.catalog.domain.AppUser;
+import com.programmerbeginner.catalog.dto.UserDetailResponseDto;
 import com.programmerbeginner.catalog.exception.ResourceNotFound;
 import com.programmerbeginner.catalog.repository.AppUserRepository;
 import com.programmerbeginner.catalog.service.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,5 +22,14 @@ public class AppUserServiceImpl implements AppUserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return appUserRepository.findByUsername(username)
                   .orElseThrow(()-> new ResourceNotFound("invalid username"));
+    }
+
+    @Override
+    public UserDetailResponseDto findUserDetail() {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        UserDetailResponseDto dto = new UserDetailResponseDto();
+        String username = ctx.getAuthentication().getName();
+        dto.setUsername(username);
+        return dto;
     }
 }

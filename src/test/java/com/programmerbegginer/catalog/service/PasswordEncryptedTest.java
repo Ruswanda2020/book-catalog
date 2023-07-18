@@ -1,4 +1,4 @@
-package com.subrutin.catalog.service;
+package com.programmerbeginner.catalog;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @Slf4j
-@SpringBootTest(classes = PasswordEncoder.class)
+@SpringBootTest()
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("default")
 public class PasswordEncryptedTest {

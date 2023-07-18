@@ -1,4 +1,4 @@
-package com.subrutin.catalog.service.impl;
+package com.programmerbegginer.catalog.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
