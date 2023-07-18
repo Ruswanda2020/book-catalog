@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,11 +14,13 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name ="category")
-public class Category implements Serializable{/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class Category implements Serializable{
+
+
+	@Serial
+	private static final long serialVersionUID = -6063205111531238403L;
+
+
 	@Id
 	@Column(name ="code",nullable = false)
 	private String code;

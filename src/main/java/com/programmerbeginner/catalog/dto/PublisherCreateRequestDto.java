@@ -19,7 +19,7 @@ public class PublisherCreateRequestDto implements Serializable{/**
 	@NotBlank
 	String PublisherName;
 	
-	@NotBlank
+	@NotBlank(message = "must not blank")
 	String companyName;
 	
 	@NotBlank

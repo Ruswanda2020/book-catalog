@@ -8,7 +8,7 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.subrutin</groupId>
+	<groupId>com.programmerbeginner</groupId>
 	<artifactId>book-catalog-v2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book-catalog-v2</name>
@@ -87,6 +87,10 @@
 	    <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

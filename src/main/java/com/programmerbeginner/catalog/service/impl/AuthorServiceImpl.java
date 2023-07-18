@@ -15,6 +15,7 @@ import com.programmerbeginner.catalog.dto.AuthorCreateRequestDto;
 import com.programmerbeginner.catalog.dto.AuthorResponseDto;
 import com.programmerbeginner.catalog.dto.AuthorUpdateRequestDto;
 import com.programmerbeginner.catalog.exception.BadRequestException;
+import com.programmerbeginner.catalog.exception.ResourceNotFound;
 import com.programmerbeginner.catalog.repository.AuthorRepository;
 import com.programmerbeginner.catalog.service.AuthorService;
 
@@ -30,7 +31,7 @@ public class AuthorServiceImpl implements AuthorService{
 	public AuthorResponseDto findAuthorById(String id) {
 		
 		Author author = authorRepository.findBySecureId(id)
-		.orElseThrow(()-> new BadRequestException("invalid.authorId"));
+		.orElseThrow(()-> new ResourceNotFound("Record not found"));
 		AuthorResponseDto dto = new AuthorResponseDto();
 		dto.setAuthorName(author.getNama());
 		dto.setBrithDate(author.getBirthDate().toEpochDay());
@@ -64,48 +65,20 @@ public class AuthorServiceImpl implements AuthorService{
 		
 	}
 
-	
-
 	@Override
 	public void deletAuthor(String authorId) {
-		// 1.ambil terlebih dahulu datanya
-		//2.kemudian delete
 		
-		
-		Author author = authorRepository.findBySecureId(authorId)
+				Author author = authorRepository.findBySecureId(authorId)
 				.orElseThrow(()-> new BadRequestException("invalid.authorId"));
 		
-		authorRepository.delete(author);
-		
-		/*
-		 * Optional<Author> authorOptional = authorRepository.findByScureId(authorId);
-		 * if(authorOptional.isPresent()) { authorRepository.deleteById(authorId); }
-		 * else { throw new NoSuchElementException("Author with ID " + authorId +
-		 * " not found"); }
-		 */
-		 
-		// authorRepository.deleteById(authorId);
-			
-		
-		  //softdelete //1.select deleted = false 
-		
-	/*	Author author = authorRepository.findByIdAndDeletedFalse(authorId) 
-				 .orElseThrow(()-> new BadRequestException("invalid.authorId"));
-		  
-		  //2.update deleted = true
-		   author.setDeleted(Boolean.TRUE);
-		   authorRepository.save(author);
-		 
-		*/
-		
-		
+				authorRepository.delete(author);
 	}
 
 	@Override
 	public List<Author> findAuthors(List<String> authorIdList) {
 		List<Author> authors = authorRepository.findBySecureIdIn(authorIdList);
 		if(authors.isEmpty())
-			throw new BadRequestException("can't empty");
+			throw new BadRequestException("invalid author id");
 		return authors;
 	}
 	@Override

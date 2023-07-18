@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -15,11 +16,13 @@ import lombok.Data;
 		@Index(name ="uk_secure_id",columnList = "secure_id")
 })
 public abstract class AbstacBaseEntity implements Serializable {
-	
+
+	@Serial
+	private static final long serialVersionUID = 8083156529541060223L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	
 	
 	@Column(name = "secure_id",nullable = false,unique = true)
 	private String secureId=UUID.randomUUID().toString();

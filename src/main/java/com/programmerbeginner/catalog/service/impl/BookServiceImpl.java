@@ -13,6 +13,7 @@ import com.programmerbeginner.catalog.dto.BookCreateRequestDto;
 import com.programmerbeginner.catalog.dto.BookDetailResponseDto;
 import com.programmerbeginner.catalog.dto.BookUpdateRequestDto;
 import com.programmerbeginner.catalog.exception.BadRequestException;
+import com.programmerbeginner.catalog.exception.ResourceNotFound;
 import com.programmerbeginner.catalog.repository.BookRepository;
 import com.programmerbeginner.catalog.service.AuthorService;
 import com.programmerbeginner.catalog.service.BookService;
@@ -38,7 +39,7 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public BookDetailResponseDto findBookDetailById(String bookId) {
 		Book book = bookRepository.findBySecureId(bookId).
-				orElseThrow(()-> new BadRequestException("book id invalid"));	
+				orElseThrow(()-> new ResourceNotFound("book id invalid"));	
 		
 		BookDetailResponseDto dto = new BookDetailResponseDto();
 		dto.setBookId(book.getSecureId());
@@ -89,9 +90,6 @@ public class BookServiceImpl implements BookService{
 		List<Category> categories = categoryService.findCategories(dto.getCategoryList());
 		Publisher publisher = publisherService.findPublisher(dto.getPublisherId());
 		
-		log.info(authors.toString());
-		log.info(categories.toString());
-		log.info(publisher.getId().toString());
 		
 			Book book = new Book();
 			book.setAuthors(authors);
@@ -101,11 +99,6 @@ public class BookServiceImpl implements BookService{
 			book.setDescription(dto.getDescription());
 			
 			bookRepository.save(book);
-			
-			log.info(book.getTitle());
-			
-			
-			
 			
 			
 	}

@@ -17,12 +17,5 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 	public Optional<Book> findBySecureId( String id);
 
 	
-	//public List<Book> findAll();
-	
-	//public void save(Book book);
-	
-	//public void update(Book book);
-	
-	//public void delete(Long id);
-	
+
 }

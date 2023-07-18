@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -27,13 +28,14 @@ import lombok.NoArgsConstructor;
 //@SQLDelete(sql = "UPDATE author SET deleted=true WHERE id = ?")
 //@Where(clause = "deleted=false")
 public class Author extends AbstacBaseEntity{
-	
-	
 
+
+	@Serial
+	private static final long serialVersionUID = -5529281617160032579L;
 	/**
-	 * 
+	 *
 	 */
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	//@SequenceGenerator(name = "author_generator",sequenceName = "author_id_seq")

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.programmerbeginner.catalog.annotasi.LogThisMethod;
 import com.programmerbeginner.catalog.dto.PublisherCreateRequestDto;
 import com.programmerbeginner.catalog.dto.PublisherListResponseDto;
+import com.programmerbeginner.catalog.dto.PublisherResponseDto;
 import com.programmerbeginner.catalog.dto.PublisherUpdateRequestDto;
 import com.programmerbeginner.catalog.dto.ResultPageResponseDto;
 import com.programmerbeginner.catalog.exception.BadRequestException;
@@ -65,7 +66,6 @@ public class PublisherResource {
 			@RequestParam(name = "sortBy",required = true,defaultValue = "name")String sortBy,
 			@RequestParam(name = "direction",required = true,defaultValue = "asc")String direction,
 			@RequestParam(name = "publisherName",required = false)String publisherName){
-		if(pages < 0) throw new BadRequestException("INVALIG PAGES");
 		return ResponseEntity.ok().body(publisherService.findPublisherList(pages, limit, sortBy, direction, publisherName));
 	}
 	

@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.List;
@@ -26,10 +27,12 @@ import lombok.Data;
 
 public class Book extends AbstacBaseEntity{
 
+	@Serial
+	private static final long serialVersionUID = 6727554523340105042L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1234567L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

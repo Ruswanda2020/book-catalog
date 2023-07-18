@@ -1,6 +1,6 @@
 logging:
   level:
-    '[com.subrutin.catalog]': TRACE
+    '[com.programmerbeginner.catalog]': TRACE
 
 spring:
   datasource:
@@ -18,7 +18,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-      
+
 app:
   currency: IDR
   time-zone: Asia/Jakarta
@@ -28,6 +28,7 @@ cloud:
   api-key: ${CLOUD_KEY2}
 
 ---
+
 spring:
   config:
     activate:
@@ -41,6 +42,7 @@ server:
   port: 8090
 
 ---
+
 spring:
   config:
     activate:
@@ -51,6 +53,7 @@ server:
   port: 8091
 
 ---
+
 spring:
   config:
     activate:

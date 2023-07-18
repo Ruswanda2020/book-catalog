@@ -1,6 +1,7 @@
 package com.programmerbeginner.catalog.domain;
 
 
+import java.io.Serial;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -17,10 +18,9 @@ import lombok.Data;
 @Table(name ="publisher")
 public class Publisher extends AbstacBaseEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 2913783973971027135L;
+
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	private Long id ;
