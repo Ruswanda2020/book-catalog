@@ -1,13 +1,11 @@
 package com.programmerbeginner.catalog.service.impl;
 
-import java.util.List;import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.programmerbeginner.catalog.domain.Category;
@@ -52,15 +50,15 @@ public class CategoryServiceImpl implements CategoryService{
 		PageRequest pagable = PageRequest.of(pages, limit,sort);
 		Page<Category> pageResult = categoryRepository.findByNameLikeIgnoreCase(categoryName, pagable);
 		
-		List<CategoryListResponsDto> dtos = pageResult.stream().map((p)->{
-			
+		List<CategoryListResponsDto> dtos = pageResult.stream().map(p -> {
+
 			CategoryListResponsDto dto = new CategoryListResponsDto();
-			
-			dto.setCode(p.getCode());	
+
+			dto.setCode(p.getCode());
 			dto.setName(p.getName());
 			dto.setDirection(p.getDescription());
-			return dto;	
-			}).collect(Collectors.toList());
+			return dto;
+			}).toList();
 		
 		return PaginationUtil.createResultPageDto(dtos, pageResult.getTotalPages(), pageResult.getTotalElements());
 	}
@@ -76,13 +74,13 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public List<CategoryListResponsDto> construckDto(List<Category> categories) {
 		
-		return categories.stream().map((c)->{
+		return categories.stream().map(c->{
 			CategoryListResponsDto dto = new CategoryListResponsDto();
 			dto.setCode(c.getCode());
 			dto.setName(c.getName());
 			dto.setDirection(c.getDescription());
 				return dto;
-		}).collect(Collectors.toList());
+		}).toList();
 	}
 	
 	

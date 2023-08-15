@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +41,7 @@ public class BookResource {
 	
 	@GetMapping("/v1/book")
 	public ResponseEntity<List<BookDetailResponseDto>> findBookList(){
-		return ResponseEntity.ok().body(bookService.findBookListDetail());
+		return ResponseEntity.ok().body(bookService.findBookAll());
 	}
 	
 	@PutMapping("/v1/book/{bookId}")

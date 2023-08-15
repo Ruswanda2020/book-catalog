@@ -1,4 +1,4 @@
-package com.programmerbeginner.catalog.service;
+package com.programmerbegginer.catalog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

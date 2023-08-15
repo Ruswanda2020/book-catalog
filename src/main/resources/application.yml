@@ -19,13 +19,7 @@ spring:
       ddl-auto: update
     show-sql: true
 
-app:
-  currency: IDR
-  time-zone: Asia/Jakarta
-  welcome-text: Hello World from wanda, are you ready?
 
-cloud:
-  api-key: ${CLOUD_KEY2}
 
 ---
 

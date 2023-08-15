@@ -11,7 +11,7 @@ public interface BookService {
 	
 	public BookDetailResponseDto findBookDetailById(String id);
 	
-	public List<BookDetailResponseDto> findBookListDetail();
+	public List<BookDetailResponseDto> findBookAll();
 	
 	public void createNewBook(BookCreateRequestDto dto);
 	

@@ -11,9 +11,8 @@ import com.programmerbeginner.catalog.domain.Book;
 
 
 public interface BookRepository extends JpaRepository<Book, Long>{
-	
-	public Optional<Book> findById( Long id);
 
+	public List<Book> findAll();
 	public Optional<Book> findBySecureId( String id);
 
 	

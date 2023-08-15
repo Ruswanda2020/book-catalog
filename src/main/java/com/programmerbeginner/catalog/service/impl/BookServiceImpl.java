@@ -46,25 +46,28 @@ public class BookServiceImpl implements BookService{
 		dto.setCategories(categoryService.construckDto(book.getCategories()));	
 		dto.setAuthors(authorService.construckDto(book.getAuthors()));
 		dto.setPublisher(publisherService.construckDto(book.getPublisher()));
-		dto.setTitel(book.getTitle());
+		dto.setTitle(book.getTitle());
 		dto.setBookDescription(book.getDescription());
 		return dto;
 	}
 
-	/* @Override
-	public List<BookDetailResponseDto> findBookListDetail() {
-		List<Book> book = bookRepository.findAll();
-		return book.stream().map((b) -> {
-			BookDetailResponseDto dto = new BookDetailResponseDto();
-			//dto.setAuthorName(b.getAuthor().getNama());
-			dto.setBookId(b.getId());
-			dto.setBookTitle(b.getTitle());
-			dto.setBookDescription(b.getDescription());
-			return dto;
-		}).collect(Collectors.toList());
+	@Override
+	public List<BookDetailResponseDto> findBookAll() {
+		List<Book> books = bookRepository.findAll();
+
+		return books.stream()
+				.map(book -> {
+					BookDetailResponseDto dto = new BookDetailResponseDto();
+					dto.setBookId(book.getSecureId());
+					dto.setTitle(book.getTitle());
+					dto.setCategories(categoryService.construckDto(book.getCategories()));
+					dto.setAuthors(authorService.construckDto(book.getAuthors()));
+					dto.setBookDescription(book.getDescription());
+					return dto;
+				})
+				.toList();
 	}
 
-	*/
 
 	@Override
 	public void updateBook(Long bookId, BookUpdateRequestDto dto) {
@@ -94,7 +97,7 @@ public class BookServiceImpl implements BookService{
 			Book book = new Book();
 			book.setAuthors(authors);
 			book.setCategories(categories);
-			book.setPublisher(publisher);;
+			book.setPublisher(publisher);
 			book.setTitle(dto.getBookTitle());
 			book.setDescription(dto.getDescription());
 			
@@ -103,20 +106,16 @@ public class BookServiceImpl implements BookService{
 			
 	}
 
-	@Override
-	public List<BookDetailResponseDto> findBookListDetail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
-	
-	
-	
-	
 
-	
-	
-	
+
+
+
+
+
+
+
+
+
 
 }

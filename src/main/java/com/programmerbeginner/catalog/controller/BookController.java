@@ -27,7 +27,7 @@ public class BookController {
 
 	@GetMapping("/list")
 	public String findBookList(Model model) {
-		List<BookDetailResponseDto> books = bookService.findBookListDetail();
+		List<BookDetailResponseDto> books = bookService.findBookAll();
 		model.addAttribute("book", books);
 		return "book/list";
 	}

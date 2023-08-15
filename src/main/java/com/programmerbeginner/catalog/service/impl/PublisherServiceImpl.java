@@ -2,14 +2,10 @@ package com.programmerbeginner.catalog.service.impl;
 
 import java.util.List;
 
-import java.util.stream.Collectors;
-
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mapping.AccessOptions.SetOptions.Propagation;
 import org.springframework.stereotype.Service;
 
 import com.programmerbeginner.catalog.domain.Publisher;
@@ -52,7 +48,7 @@ public class PublisherServiceImpl implements PublisherService {
 					publisher.setAddress(dto.getAddress());
 					return publisher;
 				})
-				.collect(Collectors.toList());
+				.toList();
 
 		publisherRepository.saveAll(publishers);
 	}
@@ -83,14 +79,14 @@ public class PublisherServiceImpl implements PublisherService {
 		PageRequest pageable = PageRequest.of(pages, limit, sort);
 		Page<Publisher> pageResult = publisherRepository.findByNameLikeIgnoreCase(publisherName, pageable);
 
-		List<PublisherListResponseDto> dtos = pageResult.stream().map((p) -> {
+		List<PublisherListResponseDto> dtos = pageResult.stream().map(p -> {
 			PublisherListResponseDto dto = new PublisherListResponseDto();
 			dto.setPublisherId(p.getSecureId());
 			dto.setPublisherName(p.getName());
 			dto.setCompanyName(p.getCompanyName());
 
 			return dto;
-		}).collect(Collectors.toList());
+		}).toList();
 
 		return PaginationUtil.createResultPageDto(dtos, pageResult.getTotalPages(), pageResult.getTotalElements());
 

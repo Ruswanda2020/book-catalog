@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.programmerbeginner.catalog.annotasi.LogThisMethod;
+
 import com.programmerbeginner.catalog.dto.PublisherCreateRequestDto;
 import com.programmerbeginner.catalog.dto.PublisherListResponseDto;
-import com.programmerbeginner.catalog.dto.PublisherResponseDto;
 import com.programmerbeginner.catalog.dto.PublisherUpdateRequestDto;
 import com.programmerbeginner.catalog.dto.ResultPageResponseDto;
-import com.programmerbeginner.catalog.exception.BadRequestException;
 import com.programmerbeginner.catalog.service.PublisherService;
 
 import jakarta.validation.Valid;
@@ -31,13 +30,14 @@ public class PublisherResource {
 	
 	private final PublisherService publisherService;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/v1/publisher")
 	public ResponseEntity<Void> createNewPublishers( @RequestBody @Valid List<PublisherCreateRequestDto> dtos){
 
 		publisherService.createPublishers(dtos);
-		return ResponseEntity.created(URI.create("/V1/publisher")).build();
+		return ResponseEntity.created(URI.create("/v1/publisher")).build();
 	}
-	
+
 	@PostMapping("/v1/publisher/single")
 	public ResponseEntity<Void> createNewPublisher( @RequestBody @Valid PublisherCreateRequestDto dto){
 
@@ -57,8 +57,8 @@ public class PublisherResource {
 		publisherService.deletePublisher(publisherId);
 		return ResponseEntity.ok().build();
 	}
-	
-	//@LogThisMethod
+
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/v1/publisher")
 	public ResponseEntity<ResultPageResponseDto<PublisherListResponseDto>> findPublisherList(
 			@RequestParam(name = "pages",required = true,defaultValue = "0")Integer pages,

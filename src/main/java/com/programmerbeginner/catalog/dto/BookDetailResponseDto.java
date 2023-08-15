@@ -1,11 +1,12 @@
 package com.programmerbeginner.catalog.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.programmerbeginner.catalog.domain.Author;
+
 
 import lombok.Data;
 @Data
@@ -13,12 +14,14 @@ import lombok.Data;
 public class BookDetailResponseDto implements Serializable{
 
 
-	private static final long serialVersionUID = 1234567L;
+	@Serial
+	private static final long serialVersionUID = 5613783778117939651L;
+
 	private String bookId;
 	private List<AuthorResponseDto> authors;
 	private List<CategoryListResponsDto> categories;
 	private PublisherResponseDto publisher;
-	private String titel;
+	private String title;
 	private String bookDescription;
 
 }

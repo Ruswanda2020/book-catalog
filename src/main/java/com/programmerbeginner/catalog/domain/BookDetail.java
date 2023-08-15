@@ -18,7 +18,7 @@ import lombok.Data;
 @Entity
 @AllArgsConstructor
 @Table(name = "book_detail")
-public class book_detail implements Serializable {
+public class BookDetail implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -328402226977866901L;

@@ -7,23 +7,22 @@ import org.springframework.security.core.GrantedAuthority;
 import java.io.Serial;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 @Data
 public class Role implements GrantedAuthority {
 
-
     @Serial
-    private static final long serialVersionUID = -215883195581440627L;
+    private static final long serialVersionUID = 2950913889326669618L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "names",nullable = false)
     private String name;
 
     @Override
     public String getAuthority() {
-        return "ROLE_ " +name;
+        return "Role_"+name;
     }
 }

@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.List;
@@ -15,12 +16,10 @@ import lombok.Data;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class BookCreateRequestDto implements Serializable {
-	
-	/**
-	 * 	
-	 */
-	private static final long serialVersionUID = 1L;
 
+
+	@Serial
+	private static final long serialVersionUID = -8793110269247432540L;
 	@NotBlank
 	private String bookTitle;
 	

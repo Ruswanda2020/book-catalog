@@ -1,10 +1,9 @@
 package com.programmerbeginner.catalog.service.impl;
 
-import com.programmerbeginner.catalog.domain.AppUser;
-import com.programmerbeginner.catalog.dto.UserDetailResponseDto;
+import com.programmerbeginner.catalog.dto.UserResponseDetailDto;
 import com.programmerbeginner.catalog.exception.ResourceNotFound;
-import com.programmerbeginner.catalog.repository.AppUserRepository;
-import com.programmerbeginner.catalog.service.AppUserService;
+import com.programmerbeginner.catalog.repository.UserRepository;
+import com.programmerbeginner.catalog.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,22 +11,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
-public class AppUserServiceImpl implements AppUserService {
+@AllArgsConstructor
+public class UserServiceImpl implements UserService {
 
-    private AppUserRepository appUserRepository;
+
+    private UserRepository userRepository;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return appUserRepository.findByUsername(username)
-                  .orElseThrow(()-> new ResourceNotFound("invalid username"));
+        return userRepository.findByUsername(username)
+                .orElseThrow(()-> new ResourceNotFound("username invalid"));
     }
 
     @Override
-    public UserDetailResponseDto findUserDetail() {
+    public UserResponseDetailDto findUserDetail() {
         SecurityContext ctx = SecurityContextHolder.getContext();
-        UserDetailResponseDto dto = new UserDetailResponseDto();
+        UserResponseDetailDto dto = new UserResponseDetailDto();
         String username = ctx.getAuthentication().getName();
         dto.setUsername(username);
         return dto;
