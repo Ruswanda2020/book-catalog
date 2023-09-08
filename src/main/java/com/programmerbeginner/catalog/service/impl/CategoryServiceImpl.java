@@ -1,7 +1,12 @@
 package com.programmerbeginner.catalog.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.programmerbeginner.catalog.dto.CategoryQueryDto;
+import com.programmerbeginner.catalog.exception.ResourceNotFound;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +17,6 @@ import com.programmerbeginner.catalog.domain.Category;
 import com.programmerbeginner.catalog.dto.CategoryCreateAndUpdateRequestDto;
 import com.programmerbeginner.catalog.dto.CategoryListResponsDto;
 import com.programmerbeginner.catalog.dto.ResultPageResponseDto;
-import com.programmerbeginner.catalog.exception.BadRequestException;
 import com.programmerbeginner.catalog.repository.CategoryRepository;
 import com.programmerbeginner.catalog.service.CategoryService;
 import com.programmerbeginner.catalog.util.PaginationUtil;
@@ -28,7 +32,8 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public void createAndUpdateCategory(CategoryCreateAndUpdateRequestDto dto) {
 		
-		Category category = categoryRepository.findByCode(dto.getCode().toLowerCase()).orElse(new Category());
+		Category category = categoryRepository.findByCode(dto.getCode().toLowerCase())
+				.orElse(new Category());
 		
 		if(category.getCode() == null) {
 			category.setCode(dto.getCode().toLowerCase());
@@ -67,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> findCategories(List<String> categoryList) {
 		List<Category> categories  = categoryRepository.findByCodeIn(categoryList);
 		if(categories.isEmpty())
-			throw new BadRequestException("can't empty");
+			throw new ResourceNotFound("INVALID CODE CATEGORY");
 		return categories;
 	}
 
@@ -82,10 +87,23 @@ public class CategoryServiceImpl implements CategoryService{
 				return dto;
 		}).toList();
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public Map<Long, List<String>> findCategoryMap(List<Long> bookIdList) {
+
+		List<CategoryQueryDto> queryList = categoryRepository.findCategoryByIdList(bookIdList);
+		Map<Long, List<String>> categoryMaps = new HashMap<>();
+		List<String> categoryCodeList = null;
+		for(CategoryQueryDto q : queryList){
+			if (!categoryMaps.containsKey(q.getIdBook())){
+				categoryCodeList =  new ArrayList<>();
+			}else {
+				categoryCodeList = categoryMaps.get(q.getIdBook());
+			}
+			categoryCodeList.add(q.getCategoryCode());
+			categoryMaps.put(q.getIdBook(), categoryCodeList);
+		}
+		return categoryMaps;
+	}
 
 }

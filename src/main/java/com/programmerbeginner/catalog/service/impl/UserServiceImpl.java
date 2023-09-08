@@ -1,5 +1,7 @@
 package com.programmerbeginner.catalog.service.impl;
 
+import com.programmerbeginner.catalog.domain.User;
+import com.programmerbeginner.catalog.dto.LoginRequestDto;
 import com.programmerbeginner.catalog.dto.UserResponseDetailDto;
 import com.programmerbeginner.catalog.exception.ResourceNotFound;
 import com.programmerbeginner.catalog.repository.UserRepository;
@@ -33,4 +35,14 @@ public class UserServiceImpl implements UserService {
         dto.setUsername(username);
         return dto;
     }
+
+    @Override
+    public void registerUser(LoginRequestDto dto) {
+        User user = new User();
+        user.setUsername(dto.getUserName());
+        user.setPassword(dto.getPassword());
+        userRepository.save(user);
+    }
+
+
 }

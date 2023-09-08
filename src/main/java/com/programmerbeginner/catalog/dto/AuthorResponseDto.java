@@ -14,8 +14,6 @@ public class AuthorResponseDto implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -8579190037215321252L;
-
 	private String authorName;
-	
 	private Long brithDate;
 }

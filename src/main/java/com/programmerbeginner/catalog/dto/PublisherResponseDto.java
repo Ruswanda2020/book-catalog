@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -13,11 +14,10 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PublisherResponseDto implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+
+	@Serial
+	private static final long serialVersionUID = 4952757090470980303L;
+
 	private String publisherId;
 	
 	private String publisherName;

@@ -1,6 +1,7 @@
 package com.programmerbeginner.catalog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.programmerbeginner.catalog.domain.Category;
 import com.programmerbeginner.catalog.dto.CategoryCreateAndUpdateRequestDto;
@@ -17,4 +18,6 @@ public interface CategoryService {
 	public List<Category> findCategories (List<String> categoryList);
 	
 	public List<CategoryListResponsDto> construckDto(List<Category> categories);
+
+	public Map<Long ,List<String>> findCategoryMap(List<Long> bookIdList);
 }

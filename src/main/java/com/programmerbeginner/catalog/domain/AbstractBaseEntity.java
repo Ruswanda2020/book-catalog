@@ -15,7 +15,7 @@ import lombok.Data;
 @Table(indexes = {
 		@Index(name ="uk_secure_id",columnList = "secure_id")
 })
-public abstract class AbstacBaseEntity implements Serializable {
+public abstract class AbstractBaseEntity implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 8083156529541060223L;

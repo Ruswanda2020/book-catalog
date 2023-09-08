@@ -4,17 +4,7 @@ import java.io.Serial;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -22,19 +12,16 @@ import lombok.Data;
 @Table(name = "book")
 @Data
 
-public class Book extends AbstacBaseEntity{
+public class Book extends AbstractBaseEntity {
 
 	@Serial
 	private static final long serialVersionUID = 6727554523340105042L;
-	/**
-	 * 
-	 */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "titel",nullable = false)
+	@Column(name = "titel",nullable = false,unique = true)
 	private String title;
 
 	@Column(name = "description",nullable =	true,columnDefinition = "TEXT")
@@ -43,7 +30,7 @@ public class Book extends AbstacBaseEntity{
 	@OneToOne(mappedBy = "book")
 	private BookDetail bookDetail;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name ="publisher_id",nullable = false)
 	private Publisher publisher;
 	

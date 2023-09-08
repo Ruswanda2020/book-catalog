@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name ="publisher")
-public class Publisher extends AbstacBaseEntity {
+public class Publisher extends AbstractBaseEntity {
 
 	@Serial
 	private static final long serialVersionUID = 2913783973971027135L;

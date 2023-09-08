@@ -16,12 +16,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("default")
 @ContextConfiguration(classes = BookCatalogV2Application.class)
-public class PasswordGeneratorTest {
+class PasswordGeneratorTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Test
-    public void setPasswordEncoder(){
-        log.info("password {}",passwordEncoder.encode("test123"));
+    void setPasswordEncoder(){
+        log.info("password {}",passwordEncoder.encode("test12345"));
     }
 }

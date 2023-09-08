@@ -20,18 +20,18 @@ public class BookCreateRequestDto implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -8793110269247432540L;
-	@NotBlank
+	@NotBlank(message = "book title  must not be blank")
 	private String bookTitle;
 	
-	@NotEmpty
+	@NotEmpty(message = "author id must not empty")
 	private List<String> authorIdList;
-	
-	@NotEmpty
+
+	@NotEmpty(message = "category must not empty")
 	private List<String> categoryList;
-	
-	@NotEmpty
-	private String PublisherId;
-	
+
+	@NotEmpty(message = "publisher id must not empty")
+	private String publisherId;
+
 	@JsonProperty("synopsis")
     private String description;
 	

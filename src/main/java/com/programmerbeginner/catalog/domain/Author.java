@@ -2,15 +2,11 @@ package com.programmerbeginner.catalog.domain;
 
 import java.io.Serial;
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +17,11 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate
 @Entity
 @Table(name = "author")
-//@SQLDelete(sql = "UPDATE author SET deleted=true WHERE id = ?")
-//@Where(clause = "deleted=false")
-public class Author extends AbstacBaseEntity{
+public class Author extends AbstractBaseEntity {
 
 
 	@Serial
 	private static final long serialVersionUID = -5529281617160032579L;
-	/**
-	 *
-	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -42,6 +33,9 @@ public class Author extends AbstacBaseEntity{
 	
 	@Column(name = "birt_date",nullable = false)	
 	private LocalDate birthDate;
+
+	@OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
+	private List<Address> addresses;
 	
 	
 

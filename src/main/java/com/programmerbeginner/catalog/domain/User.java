@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users",indexes = {@Index(name = "uk_username",columnList = "username")})
-public class User extends AbstacBaseEntity implements UserDetails {
+public class User extends AbstractBaseEntity implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 4038784383872596442L;

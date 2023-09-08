@@ -16,10 +16,6 @@ public class ResultPageResponseDto<T> implements Serializable{
 
 	@Serial
 	private static final long serialVersionUID = -2309881540829899924L;
-	/**
-	 *
-	 */
-
 
 	private List<T> result;
 	

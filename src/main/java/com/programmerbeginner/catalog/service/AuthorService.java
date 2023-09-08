@@ -1,6 +1,7 @@
 package com.programmerbeginner.catalog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.programmerbeginner.catalog.domain.Author;
 import com.programmerbeginner.catalog.dto.AuthorCreateRequestDto;
@@ -23,6 +24,8 @@ public interface AuthorService {
 	public List<Author> findAuthors(List<String> authorIdList);
 	
 	public List<AuthorResponseDto> construckDto(List<Author> authors);
+
+	public Map<Long, List<String>> findAuthorMap(List<Long> bookIdList);
 	
 	
 	

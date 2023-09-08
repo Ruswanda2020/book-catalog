@@ -2,9 +2,7 @@ package com.programmerbeginner.catalog.service;
 
 import java.util.List;
 
-import com.programmerbeginner.catalog.dto.BookCreateRequestDto;
-import com.programmerbeginner.catalog.dto.BookDetailResponseDto;
-import com.programmerbeginner.catalog.dto.BookUpdateRequestDto;
+import com.programmerbeginner.catalog.dto.*;
 
 
 public interface BookService {
@@ -15,9 +13,12 @@ public interface BookService {
 	
 	public void createNewBook(BookCreateRequestDto dto);
 	
-	public void updateBook(Long id ,BookUpdateRequestDto dto);
+	public void updateBook(Long id ,BookUpdateRequestDto dto);	
 	
 	public void deleteBook(Long id);
+
+	public ResultPageResponseDto<BookListResponseDto> findBookList(Integer page, Integer limit, String sortBy,
+																   String direction, String bookTitle, String publisherName, String authorName);
 
 	
 

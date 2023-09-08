@@ -3,9 +3,11 @@ package com.programmerbeginner.catalog.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.programmerbeginner.catalog.dto.AuthorQueryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.programmerbeginner.catalog.domain.Author;
+import org.springframework.data.jpa.repository.Query;
 
 public interface AuthorRepository extends JpaRepository<Author, Long>{
 	
@@ -17,13 +19,16 @@ public interface AuthorRepository extends JpaRepository<Author, Long>{
 	
 	public Optional<Author> findBySecureId(String id);
 	
-	//where id = :id AND deleted = false
-	//public Optional<Author> findByIdAndDeletedFalse(Long id);
-	
 	//sql -> select a from Author a where a.name LIKE ?
 	public List<Author> findByNamaLike(String authorName);
 	
 	public List<Author> findBySecureIdIn(List<String> authorIdList );
+
+	@Query("SELECT new com.programmerbeginner.catalog.dto.AuthorQueryDto(b.id, ba.nama)" +
+			"FROM Book b " +
+			"JOIN b.authors ba " +
+			"WHERE b.id IN :bookIdList")
+	public List<AuthorQueryDto> findAuthorByBookIdList(List<Long> bookIdList);
 
 	
 

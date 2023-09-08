@@ -4,9 +4,7 @@ import java.util.List;
 
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-
-import com.programmerbeginner.catalog.dto.PublisherListResponseDto;
+import org.apache.commons.lang3.StringUtils;
 import com.programmerbeginner.catalog.dto.ResultPageResponseDto;
 
 public class PaginationUtil {
@@ -31,6 +29,11 @@ public class PaginationUtil {
 		
 		
 	}
-	
+
+	public static String prepareSearchInput(String input) {
+		return StringUtils.isBlank(input) ? "%" : "%" + input + "%";
+	}
+
+
 
 }

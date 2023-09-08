@@ -1,5 +1,6 @@
 package com.programmerbeginner.catalog.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -11,18 +12,19 @@ import lombok.Data;
 @LogThisArg
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PublisherCreateRequestDto implements Serializable{/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class PublisherCreateRequestDto implements Serializable {
+
+
+	@Serial
+	private static final long serialVersionUID = 5478672999825134031L;
+
+	@NotBlank(message = " publisher name must not be blank")
+	private String publisherName;
+	
+	@NotBlank(message = "company name must not be blank")
+	private String companyName;
 	
 	@NotBlank
-	String PublisherName;
-	
-	@NotBlank(message = "must not blank")
-	String companyName;
-	
-	@NotBlank
-	String address;
+	private String address;
 
 }
